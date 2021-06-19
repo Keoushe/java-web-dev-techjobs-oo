@@ -1,5 +1,8 @@
 package org.launchcode.techjobs_oo;
 
+import javax.naming.Name;
+import java.lang.reflect.Field;
+
 public class Job {
 
     private int id;
@@ -15,15 +18,19 @@ public class Job {
     //  other five fields. The second constructor should also call the first in order to initialize
     //  the 'id' field.
     public Job (){
-        int id = 15;
+//        int id = 15;
+        this.id=nextId;
+        nextId++;
     }
     public Job(String name, Employer employer, Location location, PositionType positionType, CoreCompetency coreCompetency){
-        int id;
+//        int id;
+        this.id=nextId;
         this.name = name;
         this.employer = employer;
         this.location = location;
         this.positionType = positionType;
         this.coreCompetency = coreCompetency;
+        nextId++;
 
 
     }
@@ -31,14 +38,22 @@ public class Job {
     // TODO: Add custom equals and hashCode methods. Consider two Job objects "equal" when their id fields
     //  match.
 
-
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        if (!super.equals(object)) return false;
-        Job job = (Job) object;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Job job = (Job) o;
         return id == job.id;
     }
+
+
+//    public boolean equals(Object object) {
+//        if (this == object) return true;
+//        if (object == null || getClass() != object.getClass()) return false;
+//        if (!super.equals(object)) return false;
+//        Job job = (Job) object;
+//        return id == job.id;
+//    }
 
     public int hashCode() {
         return java.util.Objects.hash(super.hashCode(), id);
@@ -90,4 +105,41 @@ public class Job {
     public int getId() {
         return id;
     }
+
+//    public static void main(String[] args) {
+//
+//
+//
+//    }
+
+    @Override
+    public String toString (){
+        String[] fields;
+        String[] fails;
+
+        if (name.equals(" ")){
+           setName("Data not available");
+
+        }
+        if(employer.getValue().equals(" ")){
+            employer.setValue("Data not available");
+        }
+        if(location.getValue().equals(" ")){
+            location.setValue("Data not available");
+        }
+        if(positionType.getValue().equals(" ")){
+            positionType.setValue("Data not available");
+        }
+        if(coreCompetency.getValue().equals(" ")){
+            coreCompetency.setValue("Data not available");
+        }
+        String outPut = "";
+        outPut =
+                "\n" + "ID: " + id + "\n" + "Name: " + name + "Employer: " + employer + "\n" + "Location: " + location +
+                "\n" + "Position Type: " + positionType + "\n" + "Core Competency: " + coreCompetency + "\n";
+
+        return outPut;
+    }
+
+
 }
